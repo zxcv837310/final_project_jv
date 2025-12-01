@@ -13,6 +13,7 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
+    //kiem tra ket noi mongodb
 	@Bean
     public CommandLineRunner debugMongoDB(MongoTemplate mongoTemplate) {
         return args -> {
