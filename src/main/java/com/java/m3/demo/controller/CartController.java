@@ -21,22 +21,18 @@ public class CartController {
     // API thêm sản phẩm vào giỏ hàng
     @GetMapping("/cart/add")
     public String addToCart(@RequestParam("id") String id, HttpSession session) {
-        // 1. Lấy sản phẩm từ DB
         Optional<Menu> menuOpt = restaurantRepository.findById(id);
         
         if (menuOpt.isPresent()) {
-            // 2. Lấy giỏ hàng từ Session
             Cart cart = (Cart) session.getAttribute("cart");
             if (cart == null) {
                 cart = new Cart();
                 session.setAttribute("cart", cart);
             }
             
-            // 3. Thêm sản phẩm vào giỏ
             cart.addItem(menuOpt.get());
         }
         
-        // Quay lại trang shop sau khi thêm
         return "redirect:/shop"; 
     }
 
@@ -52,7 +48,7 @@ public class CartController {
         model.addAttribute("cart", cart);
         model.addAttribute("totalPrice", cart.getTotalAmount());
         
-        return "shoping-cart"; // Trả về file shoping-cart.html
+        return "shoping-cart";
     }
     
     // API xóa sản phẩm (để gắn vào nút X)

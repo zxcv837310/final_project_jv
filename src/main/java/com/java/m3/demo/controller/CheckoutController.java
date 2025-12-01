@@ -23,17 +23,15 @@ public class CheckoutController {
     public String checkout(HttpSession session, Model model) {
         Cart cart = (Cart) session.getAttribute("cart");
         
-        // Nếu giỏ hàng trống thì đá về trang shop
         if (cart == null || cart.getItems().isEmpty()) {
             return "redirect:/shop";
         }
 
-        // Tạo sẵn một đối tượng Order và random mã code để điền vào Form
         Order order = new Order();
         order.setOrderCode(orderService.generateOrderCode());
 
         model.addAttribute("order", order);
-        model.addAttribute("cart", cart); // Để hiển thị danh sách bên phải
+        model.addAttribute("cart", cart);
         
         return "checkout";
     }
@@ -48,16 +46,12 @@ public class CheckoutController {
             return "redirect:/shop";
         }
 
-        // Lưu đơn hàng vào DB
         orderService.saveOrder(order, cart);
 
-        // Xóa giỏ hàng sau khi đặt thành công
         session.removeAttribute("cart");
 
-        // Thông báo thành công (Flash Attribute dùng để truyền tin nhắn sang trang kế tiếp sau khi redirect)
         redirectAttributes.addFlashAttribute("successMessage", "Order placed successfully! Your Order ID is " + order.getOrderCode());
 
-        // Chuyển hướng về trang chủ hoặc trang shop
         return "redirect:/shop";
     }
 }

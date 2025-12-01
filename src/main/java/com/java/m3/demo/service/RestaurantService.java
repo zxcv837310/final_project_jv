@@ -18,7 +18,6 @@ public class RestaurantService {
 
     // Cập nhật hàm searchMenus trả về Page<Menu>
     public Page<Menu> searchMenus(String keyword, String category, int pageNo, int pageSize) {
-        // Tạo đối tượng Pageable (trừ 1 vì Spring bắt đầu từ 0)
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
 
         if (keyword != null && !keyword.isEmpty() && category != null && !category.isEmpty()) {
@@ -28,7 +27,6 @@ public class RestaurantService {
         } else if (category != null && !category.isEmpty()) {
             return restaurantRepository.findByCategory(category, pageable);
         } else {
-            // findAll có sẵn hỗ trợ Pageable
             return restaurantRepository.findAll(pageable);
         }
     }

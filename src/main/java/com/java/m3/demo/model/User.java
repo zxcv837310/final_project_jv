@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document(collection = "users") // Tên collection trong MongoDB
+@Document(collection = "users")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +18,7 @@ public class User {
     private String username;
     private String password;
 
-    @Field("full_name") // Ánh xạ với key "full_name" trong JSON
+    @Field("full_name")
     private String fullName;
 
     private String email;
@@ -28,5 +28,5 @@ public class User {
 
     private String address;
 
-    private String role; // Luôn là "USER"
+    private String role;
 }

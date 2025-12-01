@@ -16,13 +16,13 @@ public class Order {
     @Id
     private String id;
 
-    private String orderCode; // Mã đơn hàng 10 ký tự
+    private String orderCode;
     private String fullName;
     private String phoneNumber;
     private String address;
-    private String deliveryTime; // Lưu dạng String từ input datetime-local
+    private String deliveryTime;
     
-    private List<CartItem> items; // Lưu lại danh sách món tại thời điểm mua
+    private List<CartItem> items;
     private double totalAmount;
-    private String status; // Ví dụ: "PENDING", "COMPLETED"
+    private String status;
 }

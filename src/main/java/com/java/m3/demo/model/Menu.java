@@ -14,18 +14,18 @@ import lombok.NoArgsConstructor;
 public class Menu {
 
     @Id
-    private String id; // MongoDB sẽ tự động sinh ID nếu insert data mới
+    private String id;
 
     private String name;
 
     private String category;
 
-    private Long price; // Dùng Long vì giá tiền VNĐ trong JSON là số nguyên (45000)
+    private Long price;
 
     private String description;
 
     private Double ratings;
 
-    @Field("image_url") // Ánh xạ key "image_url" trong JSON/MongoDB sang biến imageUrl
+    @Field("image_url")
     private String imageUrl;
 }

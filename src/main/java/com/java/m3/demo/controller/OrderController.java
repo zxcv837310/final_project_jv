@@ -18,7 +18,6 @@ public class OrderController {
 
     @GetMapping("/order/track")
     public String trackOrderPage(@RequestParam(value = "code", required = false) String code, Model model) {
-        // Nếu có mã code trên URL (do bấm từ popup hoặc form tìm kiếm)
         if (code != null && !code.trim().isEmpty()) {
             Optional<Order> orderOpt = orderRepository.findByOrderCode(code.trim());
             

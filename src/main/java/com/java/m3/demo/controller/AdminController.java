@@ -49,28 +49,23 @@ public class AdminController {
                                  @RequestParam(value = "category", required = false) String category) {
         if (!isAdmin(session)) return "redirect:/shop";
 
-        // 1. Lấy danh sách menu (có lọc hoặc không)
         List<Menu> menus = restaurantService.searchMenusForAdmin(keyword, category);
         
-        // 2. Lấy danh sách category để đổ vào dropdown
         List<String> categories = restaurantService.getAllCategories();
 
         List<Order> orders = orderRepository.findAll();
 
         model.addAttribute("menus", menus);
-        model.addAttribute("categories", categories); // Truyền list category
+        model.addAttribute("categories", categories); 
         model.addAttribute("orders", orders);
         model.addAttribute("newMenu", new Menu());
         
-        // Giữ lại giá trị search để hiển thị trên ô input
         model.addAttribute("currentKeyword", keyword);
         model.addAttribute("currentCategory", category);
 
         return "admin";
     }
 
-    // ... (Các hàm save, delete, update giữ nguyên) ...
-    // ... (Copy lại các hàm đó vào đây nếu file của bạn bị thiếu) ...
     
     // API Lưu món mới
     @PostMapping("/menu/save")

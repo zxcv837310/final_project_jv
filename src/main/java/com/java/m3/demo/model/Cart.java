@@ -7,14 +7,12 @@ public class Cart {
     private List<CartItem> items = new ArrayList<>();
 
     public void addItem(Menu menu) {
-        // Kiểm tra xem món này đã có trong giỏ chưa
         for (CartItem item : items) {
             if (item.getMenu().getId().equals(menu.getId())) {
-                item.setQuantity(item.getQuantity() + 1); // Tăng số lượng
+                item.setQuantity(item.getQuantity() + 1); 
                 return;
             }
         }
-        // Chưa có thì thêm mới
         items.add(new CartItem(menu, 1));
     }
 

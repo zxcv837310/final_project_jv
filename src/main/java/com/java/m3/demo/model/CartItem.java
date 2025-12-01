@@ -11,7 +11,6 @@ public class CartItem {
     private Menu menu;
     private int quantity;
     
-    // Tính tổng tiền của item này (giá * số lượng)
     public double getTotalPrice() {
         return menu.getPrice() * quantity;
     }

@@ -35,7 +35,6 @@ public class AuthController {
         if (adminOpt.isPresent()) {
             Admin admin = adminOpt.get();
             if (admin.getPassword().equals(password)) {
-                // Lưu thông tin gọn nhẹ vào session
                 UserSessionDto sessionDto = new UserSessionDto(admin.getId(), admin.getUsername(), admin.getFullName(),
                         "ADMIN");
                 session.setAttribute("loggedInUser", sessionDto);
@@ -55,17 +54,14 @@ public class AuthController {
             }
         }
 
-        // Đăng nhập thất bại
         redirectAttributes.addFlashAttribute("errorMessage", "Sai tên đăng nhập hoặc mật khẩu!");
         return "redirect:/shop";
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        // Hủy toàn bộ session (Xóa User, Cart, và mọi dữ liệu tạm)
         session.invalidate();
 
-        // Chuyển hướng về trang chủ/shop
         return "redirect:/shop";
     }
 }

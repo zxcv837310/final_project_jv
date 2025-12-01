@@ -38,26 +38,21 @@ public class RestaurantController {
     public String shop(Model model,
                        @RequestParam(value = "keyword", required = false) String keyword,
                        @RequestParam(value = "category", required = false) String category,
-                       @RequestParam(value = "page", defaultValue = "1") int page) { // Mặc định trang 1
+                       @RequestParam(value = "page", defaultValue = "1") int page) {
 
-        int pageSize = 12; // Hiển thị 9 sản phẩm mỗi trang (để khớp với UI 3 cột)
+        int pageSize = 12;
 
-        // 1. Lấy Page<Menu> thay vì List<Menu>
         Page<Menu> menuPage = restaurantService.searchMenus(keyword, category, page, pageSize);
         
-        // 2. Lấy danh sách category
         List<String> categories = restaurantService.getAllCategories();
 
-        // 3. Đưa dữ liệu vào Model
-        model.addAttribute("menus", menuPage.getContent()); // Lấy List từ Page
+        model.addAttribute("menus", menuPage.getContent());
         model.addAttribute("categories", categories);
         
-        // --- CÁC THAM SỐ CHO PHÂN TRANG ---
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", menuPage.getTotalPages());
         model.addAttribute("totalItems", menuPage.getTotalElements());
         
-        // 4. Giữ lại giá trị filter
         model.addAttribute("currentKeyword", keyword);
         model.addAttribute("currentCategory", category);
 
